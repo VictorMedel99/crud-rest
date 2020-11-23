@@ -13,7 +13,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-
+import crud.empleado.*;
+import crud.departamento.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.DELETE;
+import static javax.ws.rs.HttpMethod.DELETE;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
 /**
  * REST Web Service
  *
@@ -21,6 +28,12 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("empleados")
 public class EmpleadosResource {
+    private Empleado emp;
+    private DAOEmpleado daoEmp;
+    private List<Empleado> listaEmpleado;
+    private Departamento departamento;
+    private DAODepartamento daoDepartamento;
+    private List<Departamento> listaDepartamento;
 
     @Context
     private UriInfo context;
@@ -37,13 +50,18 @@ public class EmpleadosResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Empleado getJson() {
-        Empleado emp=new Empleado();
-        emp.setId("1");
-        emp.setNombre("victor");
-        emp.setDireccion("mexico");
-        emp.setTelefono("2712338");
-        return emp;
+    public List<Empleado> getJson() {
+        listaEmpleado= new ArrayList<>();
+        daoEmp= new DAOEmpleado();
+        listaEmpleado=daoEmp.mostrarTodos();
+        if(listaEmpleado!=null){
+            System.out.println("operacion exitosa");
+            return listaEmpleado;
+        }else{
+            System.out.println("operacion no exitosa");
+
+        }
+        return listaEmpleado;
     }
 
     /**
@@ -52,6 +70,41 @@ public class EmpleadosResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    public boolean putJson(Empleado pojo) {
+        boolean res=false;
+        daoEmp= new DAOEmpleado();
+        if(daoEmp.actualizar(pojo)){
+            res=true;
+            return res;
+        }else{
+            return res;
+        }
     }
+    
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean postJson(Empleado pojo) {
+        boolean res=false;
+        daoEmp= new DAOEmpleado();
+        if(daoEmp.guardar(pojo)){
+            res=true;
+            return res;
+        }else{
+            return res;
+        }
+    }
+    
+    @DELETE
+    public boolean borrar(Empleado pojo) {
+        boolean res=false;
+        daoEmp= new DAOEmpleado();
+        if(daoEmp.borrar(pojo)){
+            res=true;
+            return res;
+        }else{
+            return res;
+        }
+    }
+    
 }
