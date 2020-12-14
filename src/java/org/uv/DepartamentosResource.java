@@ -57,11 +57,13 @@ public class DepartamentosResource {
     }
     
     @GET
-    @Path("/(pojo)")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Departamento getJson(Departamento pojo) {
+    public Departamento getJson(@PathParam("id") int id) {
+        Departamento dep=new Departamento();
+        dep.setId(id);
         daoDepartamento= new DAODepartamento();
-        return daoDepartamento.mostrarByID(pojo);
+        return daoDepartamento.mostrarByID(dep);
     }
     
 

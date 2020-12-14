@@ -21,6 +21,7 @@ import javax.ws.rs.DELETE;
 import static javax.ws.rs.HttpMethod.DELETE;
 import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 /**
  * REST Web Service
  *
@@ -59,6 +60,18 @@ public class EmpleadosResource {
         }
         return listaEmpleado;
     }
+    
+    
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Empleado getJson(@PathParam("id") int id) {
+        Empleado emp=new Empleado();
+        emp.setId(id);
+        daoEmp= new DAOEmpleado();
+        return daoEmp.mostrarByID(emp);
+    }
+    
 
     /**
      * PUT method for updating or creating an instance of EmpleadosResource
