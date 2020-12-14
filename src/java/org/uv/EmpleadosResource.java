@@ -28,12 +28,8 @@ import javax.ws.rs.POST;
  */
 @Path("empleados")
 public class EmpleadosResource {
-    private Empleado emp;
     private DAOEmpleado daoEmp;
     private List<Empleado> listaEmpleado;
-    private Departamento departamento;
-    private DAODepartamento daoDepartamento;
-    private List<Departamento> listaDepartamento;
 
     @Context
     private UriInfo context;
