@@ -42,7 +42,7 @@ public class DepartamentosResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Departamento> getJson() {
+    public List<Departamento> mostrarTodos() {
         listaDepartamento= new ArrayList<>();
         daoDepartamento= new DAODepartamento();
         listaDepartamento=daoDepartamento.mostrarTodos();
@@ -59,7 +59,7 @@ public class DepartamentosResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Departamento getJson(@PathParam("id") int id) {
+    public Departamento mostrarById(@PathParam("id") int id) {
         Departamento dep=new Departamento();
         dep.setId(id);
         daoDepartamento= new DAODepartamento();
@@ -73,7 +73,7 @@ public class DepartamentosResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean putJson(Departamento pojo) {
+    public boolean Actualizar(Departamento pojo) {
         boolean res=false;
         daoDepartamento= new DAODepartamento();
         if(daoDepartamento.actualizar(pojo)){
@@ -87,7 +87,7 @@ public class DepartamentosResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean postJson(Departamento pojo) {
+    public boolean guardar(Departamento pojo) {
         boolean res=false;
         daoDepartamento= new DAODepartamento();
         if(daoDepartamento.guardar(pojo)){

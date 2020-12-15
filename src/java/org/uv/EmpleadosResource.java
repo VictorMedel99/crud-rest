@@ -47,7 +47,7 @@ public class EmpleadosResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Empleado> getJson() {
+    public List<Empleado> mostrarTodos() {
         listaEmpleado= new ArrayList<>();
         daoEmp= new DAOEmpleado();
         listaEmpleado=daoEmp.mostrarTodos();
@@ -65,7 +65,7 @@ public class EmpleadosResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Empleado getJson(@PathParam("id") int id) {
+    public Empleado mostrarById(@PathParam("id") int id) {
         Empleado emp=new Empleado();
         emp.setId(id);
         daoEmp= new DAOEmpleado();
@@ -79,7 +79,7 @@ public class EmpleadosResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean putJson(Empleado pojo) {
+    public boolean actualizar(Empleado pojo) {
         boolean res=false;
         daoEmp= new DAOEmpleado();
         if(daoEmp.actualizar(pojo)){
@@ -93,7 +93,7 @@ public class EmpleadosResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean postJson(Empleado pojo) {
+    public boolean guardar(Empleado pojo) {
         boolean res=false;
         daoEmp= new DAOEmpleado();
         if(daoEmp.guardar(pojo)){
