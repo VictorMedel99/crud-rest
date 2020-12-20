@@ -2,8 +2,6 @@ package org.uv;
 
 import crud.departamento.DAODepartamento;
 import crud.departamento.Departamento;
-import crud.empleado.DAOEmpleado;
-import crud.empleado.Empleado;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -99,8 +97,11 @@ public class DepartamentosResource {
     }
     
     @DELETE
-    public boolean borrar(Departamento pojo) {
+    @Path("{id}")
+    public boolean borrar(@PathParam("id") int id) {
         boolean res=false;
+        Departamento pojo = new Departamento();
+        pojo.setId(id);
         daoDepartamento= new DAODepartamento();
         if(daoDepartamento.borrar(pojo)){
             res=true;

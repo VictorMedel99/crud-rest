@@ -105,8 +105,11 @@ public class EmpleadosResource {
     }
     
     @DELETE
-    public boolean borrar(Empleado pojo) {
+    @Path("{id}")
+    public boolean borrar(@PathParam("id") int id) {
         boolean res=false;
+        Empleado pojo=new Empleado();
+        pojo.setId(id);
         daoEmp= new DAOEmpleado();
         if(daoEmp.borrar(pojo)){
             res=true;
